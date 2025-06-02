@@ -45,7 +45,7 @@ class AccountManager:
         fernet = Fernet(email_key.encode())
         if email_key is None:
             raise Exception("Chiave di cifratura mancante. Assicurati che ENCRYPTION_KEY sia impostata.")
-        encrypted_email = fernet.encrypt(email.encode())
+        encrypted_email = fernet.encrypt(email.encode()).decode()
 
         hashed_password = self._hash_password(password)
         self.data["users"].append(username)
