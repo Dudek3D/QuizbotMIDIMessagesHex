@@ -6,7 +6,8 @@ from openai import OpenAI
 
 # Importazioni moduli interni
 sys.path.append(os.path.join(os.path.dirname(__file__), 'management'))
-from AccountManager import check_login, create_account
+from AccountManager import AccountManager as amc
+am=amc()
 
 # Chiave API OpenAI
 api_key = st.secrets["OPENAI_API_KEY"]
