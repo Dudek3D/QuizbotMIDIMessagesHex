@@ -90,15 +90,15 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 def check_and_decrement(tokens_left):
-	if tokens_left <= 0:
-		return 0, False, "Non hai abbastanza token per questa operazione."
-	return tokens_left - 1, True, "Token aggiornati con successo."
+    if tokens_left <= 0:
+        return 0, False, "Non hai abbastanza token per questa operazione."
+    return tokens_left - 1, True, "Token aggiornati con successo."
 
 # Input chat
 if prompt := st.chat_input("Scrivi un messaggio..."):
 
     username = st.session_state.get("username", "default_user")  # cambia default_user se necessario
-    user_info, _ = am.get_user_info(username)
+    user_info, _ = printl(am.get_user_info(username))
     tokens_left = user_info[3]
     
     # Controlla token
