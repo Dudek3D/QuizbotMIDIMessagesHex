@@ -90,6 +90,19 @@ for message in st.session_state.messages:
 
 # Input chat
 if prompt := st.chat_input("Scrivi un messaggio..."):
+
+    username = st.session_state.get("username", "default_user")  # cambia default_user se necessario
+    user_info, _ = am.get_user_info(username)
+    tokens_left = user_info[3]
+    
+    # Controlla token
+    new_token_count, used_token, msg_token = check_and_decrement(tokens_left)
+    st.info(msg_token)
+    
+    if not used_token:
+        st.warning("Hai finito i token.")
+        st.stop()
+    
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
