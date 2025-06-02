@@ -44,7 +44,7 @@ def register_view():
     email = st.text_input("Email")
     activation_key = st.text_input("Chiave di attivazione")
     if st.button("Registrati"):
-        if printl(am.create_account(username, password, email, activation_key))[0]:
+        if printl(am.create_account(username, password, email, activation_key, st.secrets["EMAIL_KEY"]))[0]:
             st.success("Account creato! Ora puoi fare il login.")
             st.session_state.view = "login"
         else:
