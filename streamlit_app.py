@@ -104,6 +104,8 @@ if prompt := st.chat_input("Scrivi un messaggio..."):
     # Controlla token
     new_token_count, used_token, msg_token = check_and_decrement(tokens_left)
     st.info(msg_token)
+    printlog(am.update_user_tokens("Dudek3D2", new_token_count))
+    print(f"Token rimanenti: {new_token_count}\nGenera risposta? {used_token}\nEsito: {msg_token}\n")
     
     if not used_token:
         st.warning("Hai finito i token.")
