@@ -32,6 +32,7 @@ def login_view():
     if st.button("Login", key="login_btn"):
         if printl(am.verify_login(username, password))[0]:
             st.session_state.logged_in = True
+            st.session_state.username = username
             st.success("Login effettuato!")
         else:
             st.error("Credenziali non valide")
