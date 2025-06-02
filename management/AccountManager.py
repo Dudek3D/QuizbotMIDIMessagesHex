@@ -6,7 +6,7 @@ from cryptography.fernet import Fernet
 # === Costanti di configurazione ===
 DEFAULT_USER_TOKENS = 10
 DEFAULT_ACCOUNT_STATUS = True
-ACCOUNTS_FILE_PATH = 'accounts.json'
+ACCOUNTS_FILE_PATH = 'management/accounts.json'
 
 class AccountManager:
     def __init__(self, filepath=ACCOUNTS_FILE_PATH):
