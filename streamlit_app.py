@@ -9,6 +9,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), 'management'))
 from AccountManager import AccountManager as amc
 am=amc()
 
+def printl(tuple):
+    print(tuple[1])
+    print("con esito: "+str(tuple[0]))
+    return tuple
+
 # Chiave API OpenAI
 api_key = st.secrets["OPENAI_API_KEY"]
 client = OpenAI(api_key=api_key)
@@ -25,7 +30,7 @@ def login_view():
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
     if st.button("Login"):
-        if check_login(username, password):
+        if printl(am.verify_login(username, password))[0]:
             st.session_state.logged_in = True
             st.success("Login effettuato!")
         else:
@@ -39,7 +44,7 @@ def register_view():
     email = st.text_input("Email")
     activation_key = st.text_input("Chiave di attivazione")
     if st.button("Registrati"):
-        if create_account(username, password, email, activation_key):
+        if printl(am.create_account(username, password, email, activation_key))[0]:
             st.success("Account creato! Ora puoi fare il login.")
             st.session_state.view = "login"
         else:
