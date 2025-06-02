@@ -1,7 +1,14 @@
 {
   "users": [
+    "Dudek3D"
   ],
   "accounts": {
+    "Dudek3D": [
+      "ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f",
+      "gAAAAABoPbR4mzUBRolarxPmZ9q6Vb2kzfhzyQUrab_a6emgtOnydixEeIMkmN4s7cTT55DMQuyG2qVwICrwlGfn6EUpB43CdA==",
+      true,
+      1
+    ]
   },
   "activation keys": {
     "4355bdb15abeec35966febbea1672573693e5a58f752a710b678e773ec351dae": true,
