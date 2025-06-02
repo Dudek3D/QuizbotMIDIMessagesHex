@@ -29,7 +29,7 @@ def login_view():
     st.header("🔐 Login")
     username = st.text_input("Username")
     password = st.text_input("Password", type="password")
-    if st.button("Login"):
+    if st.button("Login", key="login_btn"):
         if printl(am.verify_login(username, password))[0]:
             st.session_state.logged_in = True
             st.success("Login effettuato!")
@@ -43,7 +43,7 @@ def register_view():
     password = st.text_input("Nuova Password", type="password")
     email = st.text_input("Email")
     activation_key = st.text_input("Chiave di attivazione")
-    if st.button("Registrati"):
+    if st.button("Registrati", key="register_btn"):
         if printl(am.create_account(username, password, email, activation_key, st.secrets["EMAIL_KEY"]))[0]:
             st.success("Account creato! Ora puoi fare il login.")
             st.session_state.view = "login"
@@ -57,10 +57,10 @@ if not st.session_state.logged_in:
 
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("Login"):
+        if st.button("Login", key="switch_to_login"):
             st.session_state.view = "login"
     with col2:
-        if st.button("Registrati"):
+        if st.button("Registrati", key="switch_to_register"):
             st.session_state.view = "register"
 
     if st.session_state.view == "login":
