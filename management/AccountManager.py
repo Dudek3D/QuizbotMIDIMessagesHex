@@ -8,12 +8,6 @@ DEFAULT_USER_TOKENS = 10
 DEFAULT_ACCOUNT_STATUS = True
 ACCOUNTS_FILE_PATH = 'accounts.json'
 
-email_key = os.getenv("ENCRYPTION_KEY")
-fernet = Fernet(email_key.encode())
-
-if email_key is None:
-    raise Exception("Chiave di cifratura mancante. Assicurati che ENCRYPTION_KEY sia impostata.")
-
 class AccountManager:
     def __init__(self, filepath=ACCOUNTS_FILE_PATH):
         self.filepath = filepath
@@ -38,7 +32,7 @@ class AccountManager:
     def _hash_password(self, password):
         return hashlib.sha256(password.encode()).hexdigest()
 
-    def create_account(self, username, password, email, activation_key):
+    def create_account(self, username, password, email, activation_key, email_key):
         hashed_activation_key = self._hash_password(activation_key)
         if hashed_activation_key not in self.data["activation keys"]:
             return False, "Chiave di attivazione non valida."
@@ -47,7 +41,10 @@ class AccountManager:
 
         if username in self.data["users"]:
             return False, "Nome utente già esistente."
-        
+
+        fernet = Fernet(email_key.encode())
+        if email_key is None:
+            raise Exception("Chiave di cifratura mancante. Assicurati che ENCRYPTION_KEY sia impostata.")
         encrypted_email = fernet.encrypt(email.encode())
 
         hashed_password = self._hash_password(password)
