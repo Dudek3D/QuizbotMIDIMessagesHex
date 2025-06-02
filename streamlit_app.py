@@ -89,6 +89,11 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
+def check_and_decrement(tokens_left):
+	if tokens_left <= 0:
+		return 0, False, "Non hai abbastanza token per questa operazione."
+	return tokens_left - 1, True, "Token aggiornati con successo."
+
 # Input chat
 if prompt := st.chat_input("Scrivi un messaggio..."):
 
